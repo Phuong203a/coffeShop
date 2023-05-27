@@ -36,6 +36,7 @@ if(!isset($_SESSION['admin_name'])){
       <a href="khuyenmai.php" class="btn">khuyen mai</a>
       <a href="kho.php" class="btn">Kho</a>
       <a href="Add_sp.php" class="btn">Them san pham</a>
+      <a href="AllStaff.php" class="btn">Danh sach nhan vien</a>
       <a href="logout.php" class="btn">logout</a>
 
    </div>

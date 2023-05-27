@@ -69,14 +69,14 @@
     </thead>
     <tbody class="text-center" style="vertical-align: middle;">
       <?php
-      require "../connect.php";
-      $sql = "select student_id, first_name, last_name, create_date, email from quiz_web.student";
+      require "config.php";
+      $sql = "select * from staff";
       $result = mysqli_query($conn, $sql);
       while ($row = mysqli_fetch_array($result)) {
         echo "<tr >";
-        echo "<th>" . $row['student_id'] . "</th>";
+        echo "<th>" . $row['id'] . "</th>";
         echo "<th>" . $row['first_name'] . " " . $row['last_name'] . "</th>";
-        echo "<th>" . $row['create_date'] . "</th>";
+        echo "<th>" . $row['date_of_birth'] . "</th>";
         echo "<th>" . $row['email'] . "</th>";
         echo '<th>
               <a href="AddStaff.php" class="add" title="" data-toggle="tooltip" data-original-title="add"><i class="material-icons" style="margin:0px 20px;"><img src="../Coffe_shop/Image/Add_User_icon-icons.com_55971.png" style="margin: 10px;" width="20px">Edit</i></a>
@@ -86,29 +86,6 @@
       ?>
 
   </table>
-  <nav aria-label="..." style="display: inline-block; margin-top: 21% ;">
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="#">First</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">Previous</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active">
-        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">4</a></li>
-      <li class="page-item"><a class="page-link" href="#">5</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">Last</a>
-      </li>
-    </ul>
-  </nav>
 </body>
 
 </html>
