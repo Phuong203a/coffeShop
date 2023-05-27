@@ -27,7 +27,7 @@
 
         <div class="icons">
             <div class="fas fa-search" id="search-btn"></div>
-            <a href="../Coffe_shop/giohang.html"><img src="../Coffe_shop/Image/shopping-cart.png" style="width: 30px;margin:0px 20px"></a>
+            <a href="giohang.php"><img src="../Coffe_shop/Image/shopping-cart.png" style="width: 30px;margin:0px 20px"></a>
             <a class="fas fa-bars text-danger" id="menu-btn">Giỏ hàng</a>
         </div>
         <!-- search icon -->

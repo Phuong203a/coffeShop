@@ -96,7 +96,7 @@
             <td> 30000</td>
         </tr>
         <table>
-                <a href="../Coffe_shop/dondat.html"class="btn btn-primary" style="margin: 50px 50%; font-size: 25px;"> Đặt đơn</a>
+                <a href="Pay.php"class="btn btn-primary" style="margin: 50px 50%; font-size: 25px;"> Đặt đơn</a>
     
 </body>
 

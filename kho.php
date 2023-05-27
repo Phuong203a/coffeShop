@@ -15,12 +15,12 @@
     </style>
 </head>
 <nav class="navbar navbar-light justify-content-between" style="background-color: pink;">
-    <a href="../Coffe_shop/login_form.php" class="navbar-brand  ">Logout</a>
-    <a href="../Coffe_shop/CoffeStore.html" class="btn btn-outline-danger">Home</a>
-    <a href="../Coffe_shop/AllStaff.php" class="btn btn-outline-danger">Staff</a>
-    <a href="../Coffe_shop/khuyenmai.html" class="btn btn-outline-danger">Sale</a>
-    <a href="../Coffe_shop/giohang.html" class="btn btn-outline-danger">Pay</a>
-    <a href="../Coffe_shop/Add_sp.html" class="btn btn-outline-danger">Add product</a>
+    <a href="login_form.php" class="navbar-brand  ">Logout</a>
+    <a href=".CoffeStore.php" class="btn btn-outline-danger">Home</a>
+    <a href="AllStaff.php" class="btn btn-outline-danger">Staff</a>
+    <a href="khuyenmai.php" class="btn btn-outline-danger">Sale</a>
+    <a href="giohang.php" class="btn btn-outline-danger">Pay</a>
+    <a href="Add_sp.php" class="btn btn-outline-danger">Add product</a>
     <form class="form-inline">
         <input class="form-control mr-sm-3" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-5 my-sm-3" type="submit">Search</button>
