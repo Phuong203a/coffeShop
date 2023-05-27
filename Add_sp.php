@@ -64,7 +64,7 @@
                             <div class="mb-3">
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputName">Tên sản phẩm</label>
-                                    <input class="form-control" id="inputFirstName" type="text">
+                                    <input class="form-control" id="inputName" type="text">
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -74,8 +74,8 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label class="small mb-1" for="inputLocation">Giá</label>
-                                <input class="form-control" id="inputLocation" type="text">
+                                <label class="small mb-1" for="inputPrice">Giá</label>
+                                <input class="form-control" id="inputPrice" type="text">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputLocation">Nguyên liệu</label>
@@ -104,9 +104,9 @@
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
-                                <?php
-                                require "config.php";
-                                $sql = "select sp.id , sp.name ,sp.price ,nl.name as 'nguyen_lieu' ,km.name  as 'khuyen_mai' from san_pham sp ,
+                                <!-- <?php
+                                        require "config.php";
+                                        $sql = "select sp.id , sp.name ,sp.price ,nl.name as 'nguyen_lieu' ,km.name  as 'khuyen_mai' from san_pham sp ,
                                 sanpham_nguyenlieu sn ,
                                 nguyen_lieu nl ,
                                 khuyen_mai km 
@@ -114,31 +114,31 @@
                                 and sn.nguyen_lieu_id =nl.id 
                                 and sp.khuyen_mai_id =km.id 
                                 group by sp.name ;";
-                                $result = mysqli_query($conn, $sql);
-                                $i = 0;
-                                while ($row = mysqli_fetch_array($result)) {
-                                    $sqlNguyenLieu = "select nl.name from nguyen_lieu nl, sanpham_nguyenlieu sn
+                                        $result = mysqli_query($conn, $sql);
+                                        $i = 0;
+                                        while ($row = mysqli_fetch_array($result)) {
+                                            $sqlNguyenLieu = "select nl.name from nguyen_lieu nl, sanpham_nguyenlieu sn
                                     where nl.id =sn.nguyen_lieu_id 
-                                    and sn.san_pham_id = ".$row['id'].";";
-                                    $nguyenLieuResult = mysqli_query($conn, $sqlNguyenLieu);
-                                    $nguyenLieu='';
-                                    while ($rowNguyenLieu = mysqli_fetch_array($nguyenLieuResult)) {
-                                        $nguyenLieu = $nguyenLieu.' '.$rowNguyenLieu['name']; 
-                                    }
-                                    echo "<tr >";
-                                    echo "<td>" . ++$i . "</td>";
-                                    echo "<td>" . $row['name'] . "</td>";
-                                    echo "<td><img src='https://yokovietnam.com/wp-content/uploads/2019/03/nuoc-chanh-tuoi.jpg'>
+                                    and sn.san_pham_id = " . $row['id'] . ";";
+                                            $nguyenLieuResult = mysqli_query($conn, $sqlNguyenLieu);
+                                            $nguyenLieu = '';
+                                            while ($rowNguyenLieu = mysqli_fetch_array($nguyenLieuResult)) {
+                                                $nguyenLieu = $nguyenLieu . ' ' . $rowNguyenLieu['name'];
+                                            }
+                                            echo "<tr >";
+                                            echo "<td>" . ++$i . "</td>";
+                                            echo "<td>" . $row['name'] . "</td>";
+                                            echo "<td><img src='https://yokovietnam.com/wp-content/uploads/2019/03/nuoc-chanh-tuoi.jpg'>
                                     </td>";
-                                    echo "<td>" . $row['price'] . "</td>";
-                                    echo "<td>" . $nguyenLieu . "</td>";
-                                    echo "<td>" . $row['khuyen_mai'] . "</td>";
-                                    echo "<td><button type='button' class='btn btn-primary'>Sửa</button></td>
+                                            echo "<td>" . $row['price'] . "</td>";
+                                            echo "<td>" . $nguyenLieu . "</td>";
+                                            echo "<td>" . $row['khuyen_mai'] . "</td>";
+                                            echo "<td><button type='button' class='btn btn-primary'>Sửa</button></td>
                                     <td><button type='button' class='btn btn-danger'>Xóa</button></td>";
-                                    echo "</tr>";
-                                }
-                                ?>
-                            
+                                            echo "</tr>";
+                                        }
+                                        ?> -->
+
                             </table>
                         </form>
                     </div>
@@ -147,7 +147,7 @@
 
             </div>
             <div class="col text-center">
-                <button type="button" class="btn btn-primary" style="margin-left: 20%;">Lưu</button>
+                <button type="button" class="btn btn-primary" style="margin-left: 20%;" onclick="saveSanPham()">Lưu</button>
             </div>
         </div>
 
@@ -239,6 +239,26 @@
         </div>
     </div>
     <script>
+        function addSanPham(){
+
+        }
+
+        function saveSanPham() {
+            var name = document.getElementById("inputName").value;
+            var price = document.getElementById("inputPrice").value;
+            $.ajax({
+                method: "POST",
+                url: "AddSpController.php",
+                data: {
+                    name: name,
+                    price: price,
+                },
+                success: function(result) {
+                    alert(result);
+                    location.reload();
+                },
+            });
+        }
         $(document).ready(function() {
             $("#btnModal").click(function() {
                 $("#myModal").modal();

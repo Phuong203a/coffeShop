@@ -49,7 +49,7 @@
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <button class="btn btn-info" style="margin: 0px 80%;"> In hóa đơn</button>
+    <button class="btn btn-info" style="margin: 0px 80%;" onclick="window.print();"> In hóa đơn</button>
 </nav>
 
 <body>
@@ -139,6 +139,9 @@
         </div>
     </div>
     <script>
+        function printBill(){
+
+        }
         $(document).ready(function () {
             $("#btnTt").click(function () {
                 $("#myTt").modal();
