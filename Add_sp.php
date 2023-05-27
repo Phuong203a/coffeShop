@@ -47,7 +47,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <form class="form-inline" style="margin:0px 80%">
-        <a class="btn btn-outline-success my-5 my-sm-3" href="../Coffe_shop/kho.html">Logout</a>
+        <a class="btn btn-outline-success my-5 my-sm-3" href="logout.php">Logout</a>
     </form>
 
 </nav>
