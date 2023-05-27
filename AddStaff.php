@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputBirthday">Birthday</label>
-                                    <input class="form-control" name="inputBirthday" type="text" name="birthday"
+                                    <input class="form-control" name="inputBirthday" type="date" name="birthday"
                                         placeholder="Enter your birthday" >
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
     </div>
     </div>
     <?php
-        require "../php";
+        require "config.php";
         $inputUn = "";
         $pass = "";
         $fname = "";
@@ -139,16 +139,6 @@
             if (isset($_POST["inputLastName"])){
                 $lname = $_POST["inputLastName"];
             }
-            if (isset($_POST["optradio"])){
-                $gen = $_POST["optradio"];
-                if ($gen == "Female")
-                    $gen = 1;
-                if ($gen == "Male")
-                    $gen = 0;
-            }
-            if (isset($_POST["inputOrgName"])){
-                $orgname = $_POST["inputOrgName"];
-            }
             if (isset($_POST["Birthday"])){
                 $birth = $_POST["Birthday"];
             }
@@ -166,10 +156,11 @@
                 if($repass != $pass)
                     alert("Mật khẩu không khớp");
                 else{
+                    $dateFormat = date("Y-m-d H:i:s", strtotime($birth));
                     try { 
-                        $sql = "insert into quiz_web.student 
-                        (user_name, password, first_name, last_name, gender, student_id, date_of_birth, phone_number, email, address, class_id, major_id, create_date) 
-                        VALUES ('$inputUn' ,'$pass','$fname','$lname','$gen', '$orgname','$birth','$phone', '$email','$adr','1','2', NOW())";
+                        $sql = "insert into staff
+                        (username, password, first_name, last_name, date_of_birth, phone, email, address) 
+                        VALUES ('$inputUn' ,'$pass','$fname','$lname','$dateFormat','$phone', '$email','$adr')";
                         $result = mysqli_query($conn, $sql);
                     }catch (mysqli_sql_exception $e) { 
                         var_dump($e);

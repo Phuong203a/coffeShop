@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         body {
@@ -44,12 +43,11 @@
 
 <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#ffdada">
     <a class="navbar-brand " href="#" style="font-size: 30px;">THÊM SẢN PHẨM</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <form class="form-inline"style="margin:0px 80%">
-        <a class="btn btn-outline-success my-5 my-sm-3"href="../Coffe_shop/kho.html">Logout</a>
+    <form class="form-inline" style="margin:0px 80%">
+        <a class="btn btn-outline-success my-5 my-sm-3" href="../Coffe_shop/kho.html">Logout</a>
     </form>
 
 </nav>
@@ -106,30 +104,41 @@
                                     <th>Sửa</th>
                                     <th>Xóa</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nước chanh</td>
-                                    <td><img
-                                            src="https://yokovietnam.com/wp-content/uploads/2019/03/nuoc-chanh-tuoi.jpg">
-                                    </td>
-                                    <td>15000</td>
-                                    <td>Nước, đường mía, chanh đào, đá</td>
-                                    <td>không có</td>
-                                    <td><button type="button" class="btn btn-primary">Sửa</button></td>
-                                    <td><button type="button" class="btn btn-danger">Xóa</button></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Nước chanh</td>
-                                    <td><img
-                                            src="https://yokovietnam.com/wp-content/uploads/2019/03/nuoc-chanh-tuoi.jpg">
-                                    </td>
-                                    <td>15000</td>
-                                    <td>Nước, đường mía, chanh đào, đá</td>
-                                    <td>không có</td>
-                                    <td><button type="button" class="btn btn-primary">Sửa</button></td>
-                                    <td><button type="button" class="btn btn-danger">Xóa</button></td>
-                                </tr>
+                                <?php
+                                require "config.php";
+                                $sql = "select sp.id , sp.name ,sp.price ,nl.name as 'nguyen_lieu' ,km.name  as 'khuyen_mai' from san_pham sp ,
+                                sanpham_nguyenlieu sn ,
+                                nguyen_lieu nl ,
+                                khuyen_mai km 
+                                where sp.id =sn.san_pham_id 
+                                and sn.nguyen_lieu_id =nl.id 
+                                and sp.khuyen_mai_id =km.id 
+                                group by sp.name ;";
+                                $result = mysqli_query($conn, $sql);
+                                $i = 0;
+                                while ($row = mysqli_fetch_array($result)) {
+                                    $sqlNguyenLieu = "select nl.name from nguyen_lieu nl, sanpham_nguyenlieu sn
+                                    where nl.id =sn.nguyen_lieu_id 
+                                    and sn.san_pham_id = ".$row['id'].";";
+                                    $nguyenLieuResult = mysqli_query($conn, $sqlNguyenLieu);
+                                    $nguyenLieu='';
+                                    while ($rowNguyenLieu = mysqli_fetch_array($nguyenLieuResult)) {
+                                        $nguyenLieu = $nguyenLieu.' '.$rowNguyenLieu['name']; 
+                                    }
+                                    echo "<tr >";
+                                    echo "<td>" . ++$i . "</td>";
+                                    echo "<td>" . $row['name'] . "</td>";
+                                    echo "<td><img src='https://yokovietnam.com/wp-content/uploads/2019/03/nuoc-chanh-tuoi.jpg'>
+                                    </td>";
+                                    echo "<td>" . $row['price'] . "</td>";
+                                    echo "<td>" . $nguyenLieu . "</td>";
+                                    echo "<td>" . $row['khuyen_mai'] . "</td>";
+                                    echo "<td><button type='button' class='btn btn-primary'>Sửa</button></td>
+                                    <td><button type='button' class='btn btn-danger'>Xóa</button></td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            
                             </table>
                         </form>
                     </div>
@@ -152,7 +161,7 @@
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </div>
-                <div class="modal-body"style="font-size:15px">
+                <div class="modal-body" style="font-size:15px">
                     <table border="">
                         <tr>
                             <th>STT</th>
@@ -165,7 +174,7 @@
                         <tr>
                             <td>1</td>
                             <td>Đường</td>
-                            <td><input type="text "style="width: 50px;"></input></td>
+                            <td><input type="text " style="width: 50px;"></input></td>
                             <td>2</td>
                             <td>kg</td>
                             <td><button type="button" class="btn btn-danger">Xóa</button></td>
@@ -173,13 +182,13 @@
                         <tr>
                             <td>2</td>
                             <td>Chanh</td>
-                            <td><input type="text"style="width:50px;"></input></td>
+                            <td><input type="text" style="width:50px;"></input></td>
                             <td>3</td>
                             <td>kg</td>
                             <td><button type="button" class="btn btn-danger">Xóa</button></td>
                         </tr>
                     </table>
-                    <button type="button" class="btn btn-warning"style="margin: 10px 45%;">Lưu</button>
+                    <button type="button" class="btn btn-warning" style="margin: 10px 45%;">Lưu</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -197,7 +206,7 @@
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </div>
-                <div class="modal-body"style="font-size:15px">
+                <div class="modal-body" style="font-size:15px">
                     <table border="">
                         <tr>
                             <th>STT</th>
@@ -218,25 +227,25 @@
                             <td><button type="button" class="btn btn-danger">Xóa</button></td>
                         </tr>
                     </table>
-                    <button type="button" class="btn btn-warning"style="margin: 10px 45%;">Lưu</button>
+                    <button type="button" class="btn btn-warning" style="margin: 10px 45%;">Lưu</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
-               
+
             </div>
-          
+
 
         </div>
     </div>
     <script>
-        $(document).ready(function () {
-            $("#btnModal").click(function () {
+        $(document).ready(function() {
+            $("#btnModal").click(function() {
                 $("#myModal").modal();
             });
         });
-        $(document).ready(function () {
-            $("#btnKm").click(function () {
+        $(document).ready(function() {
+            $("#btnKm").click(function() {
                 $("#myKm").modal();
             });
         });

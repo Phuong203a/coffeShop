@@ -32,7 +32,12 @@ if(!isset($_SESSION['admin_name'])){
       <p>this is an admin page</p>
       <a href="login_form.php" class="btn">login</a>
       <a href="register_form.php" class="btn">register</a>
+      <a href="AddStaff.php" class="btn">them nhan vien</a>
+      <a href="khuyenmai.php" class="btn">khuyen mai</a>
+      <a href="kho.php" class="btn">Kho</a>
+      <a href="Add_sp.php" class="btn">Them san pham</a>
       <a href="logout.php" class="btn">logout</a>
+
    </div>
 
 </div>
